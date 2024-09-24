@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-     <Button>Hello</Button>
+     <Button className='bg-orange'>Hello</Button>
     </>
   )
 }
