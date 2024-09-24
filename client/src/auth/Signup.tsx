@@ -1,19 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-// import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
+import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
 // import { useUserStore } from "@/store/useUserStore";
 import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 // typescript me type define krne ka 2 trika hota hai
-type SignupInputState = {
-    fullname: string,
-    email: string,
-    password: string,
-    contact: string
-}
+
 const Signup = () => {
     const loading = false;
 
@@ -23,7 +18,7 @@ const Signup = () => {
         password: "",
         contact: "",
     });
-    // const [errors, setErrors] = useState<Partial<SignupInputState>>({});
+    const [errors, setErrors] = useState<Partial<SignupInputState>>({});
     // const {signup, loading} = useUserStore();
     // const navigate = useNavigate();
     const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,12 +28,12 @@ const Signup = () => {
     const loginSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
         // form validation check start
-        // const result = userSignupSchema.safeParse(input);
-        // if (!result.success) {
-        //     const fieldErrors = result.error.formErrors.fieldErrors;
-        //     setErrors(fieldErrors as Partial<SignupInputState>);
-        //     return;
-        // }
+        const result = userSignupSchema.safeParse(input);
+        if (!result.success) {
+            const fieldErrors = result.error.formErrors.fieldErrors;
+            setErrors(fieldErrors as Partial<SignupInputState>);
+            return;
+        }
         // login api implementation start here
         // try {
         //     await signup(input);
@@ -65,7 +60,7 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <User className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && <span className="text-xs text-red-500">{errors.fullname}</span>} */}
+                        {errors && <span className="text-xs text-red-500">{errors.fullname}</span>}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -79,7 +74,7 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && <span className="text-xs text-red-500">{errors.email}</span>} */}
+                        {errors && <span className="text-xs text-red-500">{errors.email}</span>}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -93,7 +88,7 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && <span className="text-xs text-red-500">{errors.password}</span>} */}
+                        {errors && <span className="text-xs text-red-500">{errors.password}</span>}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -107,7 +102,7 @@ const Signup = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <PhoneOutgoing className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && <span className="text-xs text-red-500">{errors.contact}</span>} */}
+                        {errors && <span className="text-xs text-red-500">{errors.contact}</span>}
                     </div>
                 </div>
                 <div className="mb-10">

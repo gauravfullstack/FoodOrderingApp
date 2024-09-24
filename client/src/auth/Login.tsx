@@ -1,16 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-// import { LoginInputState, userLoginSchema } from "@/schema/userSchema";
+import { LoginInputState, userLoginSchema } from "@/schema/userSchema";
 // import { useUserStore } from "@/store/useUserStore";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-
-type LoginInputState = {
-    email: string,
-    password: string
-}
 
 const Login = () => {
     const loading = false;
@@ -18,7 +13,7 @@ const Login = () => {
         email: "",
         password: "",
     });
-    //   const [errors, setErrors] = useState<Partial<LoginInputState>>({});
+      const [errors, setErrors] = useState<Partial<LoginInputState>>({});
     //   const { loading, login } = useUserStore();
     //   const navigate = useNavigate();
 
@@ -28,12 +23,12 @@ const Login = () => {
     };
     const loginSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
-        // const result = userLoginSchema.safeParse(input);
-        // if (!result.success) {
-        //     const fieldErrors = result.error.formErrors.fieldErrors;
-        //     setErrors(fieldErrors as Partial<LoginInputState>);
-        //     return;
-        // }
+        const result = userLoginSchema.safeParse(input);
+        if (!result.success) {
+            const fieldErrors = result.error.formErrors.fieldErrors;
+            setErrors(fieldErrors as Partial<LoginInputState>);
+            return;
+        }
         // try {
         //     await login(input);
         //     navigate("/");
@@ -62,9 +57,9 @@ const Login = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && (
+                        {errors && (
               <span className="text-xs text-red-500">{errors.email}</span>
-            )} */}
+            )}
                     </div>
                 </div>
                 <div className="mb-4">
@@ -78,9 +73,9 @@ const Login = () => {
                             className="pl-10 focus-visible:ring-1"
                         />
                         <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-                        {/* {errors && (
+                        {errors && (
               <span className="text-xs text-red-500">{errors.password}</span>
-            )} */}
+            )}
                     </div>
                 </div>
                 <div className="mb-10">
