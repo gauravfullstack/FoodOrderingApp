@@ -4,6 +4,7 @@ import Login from './auth/Login'
 import Signup from './auth/Signup'
 import MainLayout from './MainLayout'
 import ForgotPassword from './auth/Forgot-Password'
+import VerifyEmail from './auth/Verify-Email'
 
 const appRouter = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const appRouter = createBrowserRouter([
     path: "/forgot-password",
     element: <ForgotPassword />
   },
+  {
+    path: "/verify-email",
+    element: <VerifyEmail />
+  },
+
 
 ])
 function App() {
