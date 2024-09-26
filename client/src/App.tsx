@@ -5,8 +5,22 @@ import Signup from './auth/Signup'
 import ForgotPassword from './auth/Forgot-Password'
 import VerifyEmail from './auth/Verify-Email'
 import Navbar from './components/Navbar'
+import MainLayout from './layout/MainLayout'
+import HeroSection from './components/HeroSection'
 
 const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <MainLayout />
+    ),
+    children: [
+      {
+        path: "/",
+        element: <HeroSection />,
+      },
+    ],
+  },
   {
     path: "/",
     element: <Navbar />
